@@ -5,16 +5,16 @@ const heartLoader = document.querySelector(".cssload-main");
 const yesBtn = document.querySelector(".js-yes-btn");
 const noBtn = document.querySelector(".js-no-btn");
 
-// Move "No" button (MOBILE OPTIMIZED)
-function moveNoButton() {
-  const containerWidth = questionContainer.offsetWidth;
-  const containerHeight = questionContainer.offsetHeight;
+/* ---------- MOVE "NO" BUTTON (PC + MOBILE) ---------- */
+function moveNoButton(e) {
+  // ✅ Prevent text selection / long-press menu on mobile
+  if (e) e.preventDefault();
 
-  const btnWidth = noBtn.offsetWidth;
-  const btnHeight = noBtn.offsetHeight;
+  const containerRect = questionContainer.getBoundingClientRect();
+  const btnRect = noBtn.getBoundingClientRect();
 
-  const maxX = containerWidth - btnWidth;
-  const maxY = containerHeight - btnHeight;
+  const maxX = containerRect.width - btnRect.width;
+  const maxY = containerRect.height - btnRect.height;
 
   const newX = Math.random() * maxX;
   const newY = Math.random() * maxY;
@@ -23,10 +23,14 @@ function moveNoButton() {
   noBtn.style.top = `${newY}px`;
 }
 
-// MOBILE TOUCH (instant)
-noBtn.addEventListener("touchstart", moveNoButton);
+/* ---------- EVENTS ---------- */
+/* PC: move on hover */
+noBtn.addEventListener("pointerenter", moveNoButton);
 
-// YES button
+/* Mobile: move instantly on tap */
+noBtn.addEventListener("pointerdown", moveNoButton);
+
+/* ---------- YES BUTTON ---------- */
 yesBtn.addEventListener("click", () => {
   questionContainer.style.display = "none";
   heartLoader.style.display = "inherit";
