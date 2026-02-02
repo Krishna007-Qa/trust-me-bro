@@ -45,13 +45,17 @@ body {
   text-align: center;
 }
 
-/* BUTTONS */
+/* BUTTON CONTAINER */
 .button-container {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
+
+  /* Extra mobile polish */
+  touch-action: manipulation;
 }
 
+/* BUTTONS */
 .btn {
   position: absolute;
   border: none;
@@ -65,9 +69,16 @@ body {
   transform: scale(1.05);
   box-shadow: 0px 4px 15px rgba(255, 107, 129, 0.5);
 
-  /* MOBILE PERFORMANCE FIX */
+  /* ✅ MOBILE BUG FIX (IMPORTANT) */
   touch-action: manipulation;
   will-change: left, top, transform;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  -webkit-touch-callout: none;
 }
 
 .btn:hover {
@@ -199,7 +210,7 @@ body {
 @media (max-width: 768px) {
 
   .btn {
-    transition: none; /* removes 2nd tap lag */
+    transition: none; /* removes 2nd-tap lag */
   }
 
   .btn:hover {
@@ -212,4 +223,4 @@ body {
   .question {
     font-size: 2.4rem;
   }
-}
+                      }
